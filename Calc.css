@@ -23,10 +23,6 @@ main {
     word-wrap: break-word;
     word-break: break-all;
 }
-#other {
-    display: grid;
-    grid-template-columns: 50% 50%;
-}
 #inputs {
     display: flex;
     
