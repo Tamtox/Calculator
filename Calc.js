@@ -23,3 +23,11 @@ const multiply = document.querySelector('#multiply')
 multiply.addEventListener('click',()=>{calculation.innerHTML+="*"})
 const divide = document.querySelector('#divide')
 divide.addEventListener('click',()=>{calculation.innerHTML+="/"})
+//Calculator Function
+function calculate() {
+    let x = calculation.innerHTML
+    
+}
+let equals = document.querySelector('#equals');
+equals.addEventListener('click',()=>{
+})
