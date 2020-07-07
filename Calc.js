@@ -44,7 +44,7 @@ minus.addEventListener('click',()=>{
         if(calculation.innerHTML[calculation.innerHTML.length-1] ==="-" && operators.includes(calculation.innerHTML[calculation.innerHTML.length-2])&& operators.includes(calculation.innerHTML[calculation.innerHTML.length-3])) {
             calculation.innerHTML=calculation.innerHTML.slice(0,-1)
         }
-        else if(calculation.innerHTML[0]==='-' && calculation.innerHTML[1] === '-') {
+        else if((calculation.innerHTML[0]==='-' && calculation.innerHTML[1] === '-')||(calculation.innerHTML[calculation.innerHTML.length-1]==='-' && calculation.innerHTML[calculation.innerHTML.length-2]==='.')) {
             calculation.innerHTML=calculation.innerHTML.slice(0,-1)
         }
 })
@@ -90,4 +90,5 @@ function removeTrailingOperators() {
 //Calculator function
 let equals = document.querySelector('#equals');
 equals.addEventListener('click',()=>{
+    
 })
