@@ -32,12 +32,21 @@ plus.addEventListener('click',()=>{
     }
     check()
 })
-const minus = document.querySelector('#minus')
+const minus = document.querySelector('#minus');
 minus.addEventListener('click',()=>{
-    if(calculation.innerHTML.length>0) {
         calculation.innerHTML+="-"
-    }
-    check()
+        let operators = "+-*/.".split("");
+        for(let i of operators) {
+            if(calculation.innerHTML[calculation.innerHTML.length-1] !=="-" && operators.includes(calculation.innerHTML[calculation.innerHTML.length-2])) {
+                calculation.innerHTML=calculation.innerHTML.slice(0,-1)
+            }
+        }
+        if(calculation.innerHTML[calculation.innerHTML.length-1] ==="-" && operators.includes(calculation.innerHTML[calculation.innerHTML.length-2])&& operators.includes(calculation.innerHTML[calculation.innerHTML.length-3])) {
+            calculation.innerHTML=calculation.innerHTML.slice(0,-1)
+        }
+        else if(calculation.innerHTML[0]==='-' && calculation.innerHTML[1] === '-') {
+            calculation.innerHTML=calculation.innerHTML.slice(0,-1)
+        }
 })
 const multiply = document.querySelector('#multiply')
 multiply.addEventListener('click',()=>{
@@ -68,15 +77,17 @@ percent.addEventListener('click',()=>{
     }
     check()
 })
-//Calculator Function
-function calculate() {
-    let operators = "+*/.";
-    if(operators.includes(calculation.innerHTML[calculation.innerHTML.length-1])) {
+//Get rid of trailing operators
+function removeTrailingOperators() {
+    let operators = "+-*/.";
+    if(operators.includes(calculation.innerHTML[calculation.innerHTML.length-1]) && operators.includes(calculation.innerHTML[calculation.innerHTML.length-2])) {
+        calculation.innerHTML=calculation.innerHTML.slice(0,-2)
+    }
+    else if(operators.includes(calculation.innerHTML[calculation.innerHTML.length-1])) {
         calculation.innerHTML=calculation.innerHTML.slice(0,-1)
     }
-    let decimal = /\d+\W\d+/g;
-    let int = /\d+/g;
 }
+//Calculator function
 let equals = document.querySelector('#equals');
 equals.addEventListener('click',()=>{
 })
