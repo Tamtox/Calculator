@@ -70,6 +70,10 @@ percent.addEventListener('click',()=>{
 })
 //Calculator Function
 function calculate() {
+    let operators = "+*/.";
+    if(operators.includes(calculation.innerHTML[calculation.innerHTML.length-1])) {
+        calculation.innerHTML=calculation.innerHTML.slice(0,-1)
+    }
     let decimal = /\d+\W\d+/g;
     let int = /\d+/g;
 }
