@@ -90,5 +90,13 @@ function removeTrailingOperators() {
 //Calculator function
 let equals = document.querySelector('#equals');
 equals.addEventListener('click',()=>{
-    
+    removeTrailingOperators();
+    let digits = '1234567890'
+    const result = 
+    let split = calculation.innerHTML.split("");
+    for(let i=0;i<split.length;i++) {
+        if(digits.includes(split[i])&&digits.includes(split[i+1])) {
+            
+        }
+    }
 })
