@@ -101,13 +101,16 @@ equals.addEventListener('click',()=>{
             currentNum+=split[i]
         }
         else if(operators.includes(split[i]) || (split[i] ==="-" && split[i+1] !=="-" && i!==0)) {
-            result.push(parseFloat(currentNum))
-            result.push(split[i]);
-            currentNum=""
-        }
-        else if(split[i] ==="%") {
-            result.push(parseFloat(currentNum)/100)
-            currentNum=""
+            if(currentNum.includes("%")) {
+                result.push(parseFloat(currentNum)/100)
+                result.push(split[i]);
+                currentNum=""
+            }
+            else {
+                result.push(parseFloat(currentNum))
+                result.push(split[i]);
+                currentNum=""
+            }
         }
         else if(i===split.length-1) {
             currentNum+=split[i];
@@ -132,7 +135,7 @@ equals.addEventListener('click',()=>{
             }
         }
     }
-    //Addition and Substraction
+    //Addition and Substraction 
     for(let i=0;i<result.length;i++) {
         if(result[i+1]==="+" || result[i+1]==="-") {
             if(result[i+1]==="+") {
