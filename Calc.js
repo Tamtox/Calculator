@@ -91,12 +91,75 @@ function removeTrailingOperators() {
 let equals = document.querySelector('#equals');
 equals.addEventListener('click',()=>{
     removeTrailingOperators();
-    let digits = '1234567890'
-    const result = 
+    const operators = '+*/';
+    let currentNum = "";
+    const result = [];
     let split = calculation.innerHTML.split("");
     for(let i=0;i<split.length;i++) {
-        if(digits.includes(split[i])&&digits.includes(split[i+1])) {
-            
+        if((split[0]==="-" && i === 0 )|| (split[i])==='-' && operators.includes(split[i-1])) {
+            currentNum+=split[i]
+        }
+        else if(operators.includes(split[i]) || (split[i] ==="-" && split[i+1] !=="-" && i!==0)) {
+            result.push(parseFloat(currentNum))
+            result.push(split[i]);
+            currentNum=""
+        }
+        else if(split[i] ==="%") {
+            result.push(parseFloat(currentNum)/100)
+            currentNum=""
+        }
+        else if(i===split.length-1) {
+            currentNum+=split[i];
+            result.push(parseFloat(currentNum))
+        }
+        else {
+            currentNum+=split[i]
         }
     }
+    for(let i=0;i<result.length;i++) {
+        if(result[i+1]==="*" || result[i+1]==="/") {
+            if(result[i+1]==="*") {
+                let x = result[i] * result[i+2]
+                result.splice(i,3,x)
+                i--
+            }
+            else if(result[i+1]==="/") {
+                let x = result[i] / result[i+2]
+                result.splice(i,3,x)
+                i--
+            }
+        }
+    }
+    for(let i=0;i<result.length;i++) {
+        if(result[i+1]==="+" || result[i+1]==="-") {
+            if(result[i+1]==="+") {
+                let x = result[i] + result[i+2]
+                result.splice(i,3,x)
+                i--
+            }
+            else if(result[i+1]==="-") {
+                let x = result[i] - result[i+2]
+                result.splice(i,3,x)
+                i--
+            }
+        }
+    }
+    calculation.innerHTML=result
 })
+function a(result) {
+    for(let i=0;i<result.length;i++) {
+        if(result[i+1]==="*" || result[i+1]==="/") {
+            if(result[i+1]==="*") {
+                let x = result[i] * result[i+2]
+                result.splice(i,3,x)
+                i--
+            }
+            else if(result[i+1]==="/") {
+                let x = result[i] / result[i+2]
+                result.splice(i,3,x)
+                i--
+            }
+        }
+    }
+    return result
+}
